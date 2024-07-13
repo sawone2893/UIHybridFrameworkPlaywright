@@ -1,0 +1,7 @@
+{
+  "IS_BROWSER_MODE_HEADLESS": false,
+  "ENV_PATH":"env/.env.qa",
+  "SCREENSHOT_PATH":"./reports",
+  "TEST_DATA_PATH": "./testdata/testdata.json",
+  "DOWNLOADED_FILE_PATH":"./downloadedFiles"
+}

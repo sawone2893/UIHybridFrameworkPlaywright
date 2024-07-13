@@ -1,0 +1,5 @@
+node_modules
+testdata/testdata.json
+reports
+downloadedFiles
+package-lock.json
