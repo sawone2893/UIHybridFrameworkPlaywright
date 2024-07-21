@@ -32,13 +32,6 @@ export class CommonPage{
         selectedOption: (attributeName:string,value:string, option: string)=>`//select[contains(@${attributeName},'${value}')]/option[text() = '${option}' and @selected='selected']`
     }
 
-    async selectUserRole(userRole:string){
-        await global.actionDriver.selectDropdown(this.pageObject.tagWithAttribute("select","name","roleForm:roleOption"),userRole);
-        await global.actionDriver.clickElement(this.pageObject.buttonWithText("OK"));
-        await global.actionDriver.waitForPageLoadState("load");
-        await global.actionDriver.waitForElement(5);
-    }
-
     async selectDialogMainViewComboboxDropdown(dialogMainViewName:string,ecparentcompName:string,ecValue: string){
         await global.actionDriver.clickElement(this.pageObject.dialogMainViewElementAttribute(
             dialogMainViewName,
@@ -54,12 +47,6 @@ export class CommonPage{
         await global.actionDriver.clickElement(this.pageObject.dropdownOptionWithFieldName(dropdownFieldTagName,dropdownFieldName,dropdownClassName,ecValue));
     }
 
-    async createdNewSession(userRole:string){
-        await global.actionDriver.clickElement(this.pageObject.buttonWithText("Create New Session"));
-        await global.actionDriver.waitForElement(5);
-        await this.selectUserRole(userRole);
-    }
-
     async selectCheckBox(status:string,checkboxName:string){
         //checkboxName:tagName,Checkbox Text value
         const values=checkboxName.split(",");
@@ -73,26 +60,6 @@ export class CommonPage{
                 await global.actionDriver.clickElement(this.pageObject.checkBoxOrRadioButtonField(values[0],checkboxNameTemp));
             }
         }
-    }
-
-    async loginAppWithoutRoleSelection(userName:string,password:string){
-
-        await global.expect_(await global.actionDriver.waitUntillElementAppear(this.pageObject.tagWithAttribute("input","name","loginfmt"),110)).to.be.equal(true);
-        await global.actionDriver.enterTextOnElement(this.pageObject.tagWithAttribute("input","name","loginfmt"), userName);
-        await global.actionDriver.clickElement(this.pageObject.tagWithAttribute("input","value","Next"));
-        await global.actionDriver.waitForPageLoadState("networkidle");
-        await global.expect_(await global.actionDriver.waitUntillElementAppear(this.pageObject.tagWithAttribute("input","name","passwd"),110)).to.be.equal(true);
-        await global.actionDriver.waitForElement(Number(2));
-        await global.actionDriver.enterTextOnElement(this.pageObject.tagWithAttribute("input","name","passwd"), password);
-        await global.actionDriver.clickElement(this.pageObject.tagWithAttribute("input","value","Sign in"));
-        await global.actionDriver.waitForPageLoadState("networkidle");
-
-        //This to handle multi-select popup
-        if(await global.actionDriver.isElementDisplayed(this.pageObject.tagWithText("span","Select < 50 Dealers, Or Cancle to not set"))){
-            await global.actionDriver.clickElement(this.pageObject.buttonWithText("Cancel"));
-            await global.actionDriver.waitForElement(5);
-        }
-
     }
 
     async changeScreenControl(screenControl:string, frameLocator?: string) {
