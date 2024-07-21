@@ -17,14 +17,13 @@ steps:
 - task: npmAuthenticate@0
   displayName: 'npm Authenticate .npmrc'
   inputs:
-      workingFile: './CatWebLimsAutomation/.npmrc'
+      workingFile: './.npmrc'
       customEndpoint: 'NPM Artifactory'
 - task: NodeTool@0
   inputs:
     versionSpec: '18.x'
   displayName: 'Install Node.js'
 - script: |
-    cd CatWebLimsAutomation
     npm install
   displayName: 'Install dependencies'
 
@@ -33,18 +32,16 @@ steps:
   displayName: 'Install Playwright browsers'
 
 - script: |
-    cd CatWebLimsAutomation
     npm run Regression
   displayName: 'Executing Regression Test'
   continueOnError: true
   
 - script: |
-    cd CatWebLimsAutomation
     npm run build
   displayName: 'Generating Cucumber HTML Report'
 - task: CopyFiles@1
   inputs:
-   SourceFolder: 'CatWebLimsAutomation/reports'
+   SourceFolder: 'reports'
    TargetFolder: '$(Build.ArtifactStagingDirectory)/test-results/Regression'   
 
 - task: PublishPipelineArtifact@1
