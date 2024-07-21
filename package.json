@@ -1,10 +1,10 @@
 {
-  "name": "catautomation",
+  "name": "uihybridframeworkplaywright",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx cucumber-js --config=./cucumber.js --tags @TT",
+    "Test": "npx cucumber-js --config=./cucumber.js --tags @TT",
     "Smoke": "npx cucumber-js --config=./cucumber.js --tags @Smoke",
     "Sanity": "npx cucumber-js --config=./cucumber.js --tags @Sanity",
     "Regression": "npx cucumber-js --config=./cucumber.js --tags @Regression",

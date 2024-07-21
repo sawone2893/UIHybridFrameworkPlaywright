@@ -17,7 +17,7 @@ steps:
 - task: npmAuthenticate@0
   displayName: 'npm Authenticate .npmrc'
   inputs:
-      workingFile: './CatWebLimsAutomation/.npmrc'
+      workingFile: './.npmrc'
       customEndpoint: 'NPM Artifactory'
 - task: NodeTool@0
   inputs:
@@ -33,7 +33,6 @@ steps:
   displayName: 'Install Playwright browsers'
 
 - script: |
-    cd CatWebLimsAutomation
     npm run Sanity
   displayName: 'Executing Sanity Test'
   continueOnError: true
@@ -42,16 +41,16 @@ steps:
   
 - task: PublishCucumberReport@1
   inputs:
-    jsonDir: 'CatWebLimsAutomation/reports'
-    outputPath: 'CatWebLimsAutomation/reports'
+    jsonDir: '/reports'
+    outputPath: '/reports'
     theme: 'hierarchy'
     reportSuiteAsScenarios: true
-    name: 'WebLimsSanityReport'
-    title: 'WebLimsSanityReport'
+    name: 'SanityReport'
+    title: 'SanityReport'
 
 - task: CopyFiles@1
   inputs:
-   SourceFolder: 'CatWebLimsAutomation/reports'
+   SourceFolder: 'reports'
    TargetFolder: '$(Build.ArtifactStagingDirectory)/test-results/Sanity'   
 
 - task: PublishPipelineArtifact@1
